@@ -695,13 +695,6 @@
 			remoteGlobalIDString = 6A476EE60D5C48CE00C6C744;
 			remoteInfo = "OpenVanilla (Framework)";
 		};
-		6AB931920EA42E60005CD336 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A476ED90D5C48AB00C6C744 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6AB931650EA42CE2005CD336;
-			remoteInfo = YKReverseLookup;
-		};
 		6AC898FA0EB5FA41009217C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A476ED90D5C48AB00C6C744 /* Project object */;
@@ -3515,7 +3508,6 @@
 				D4B3E80F0DC7A90C000980D8 /* PBXTargetDependency */,
 				D43CC14C0EE413750032096E /* PBXTargetDependency */,
 				6A859F830E41AAB5002C3544 /* PBXTargetDependency */,
-				6AB931930EA42E60005CD336 /* PBXTargetDependency */,
 				6AEB82700EADC46C005F82AB /* PBXTargetDependency */,
 				6AC8990C0EB5FAE2009217C5 /* PBXTargetDependency */,
 				6A0139200ED1D52300715577 /* PBXTargetDependency */,
@@ -4616,11 +4608,6 @@
 			target = 6A476EE60D5C48CE00C6C744 /* OpenVanilla (Framework) */;
 			targetProxy = 6AB931740EA42D19005CD336 /* PBXContainerItemProxy */;
 		};
-		6AB931930EA42E60005CD336 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6AB931650EA42CE2005CD336 /* YKReverseLookup */;
-			targetProxy = 6AB931920EA42E60005CD336 /* PBXContainerItemProxy */;
-		};
 		6AC898FB0EB5FA41009217C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6A476EE60D5C48CE00C6C744 /* OpenVanilla (Framework) */;
@@ -5440,7 +5427,6 @@
 		6A4772990D5C5FCE00C6C744 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -5672,7 +5658,6 @@
 					"OVAFREVERSELOOKUP_SOURCE_TABLE_PATTERNS_SEMICOLON_SEPARATED=\\\"Generic-*;Mandarin-bpmf-cin\\\"",
 					"OVAFREVERSELOOKUP_IDENTIFIER_PREFIX=\\\"ReverseLookup\\\"",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ModulePackages/OVAFReverseLookup/YKReverseLookup-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				OTHER_CFLAGS = "";
@@ -5699,7 +5684,6 @@
 					"OVAFREVERSELOOKUP_SOURCE_TABLE_PATTERNS_SEMICOLON_SEPARATED=\\\"Generic-*;Mandarin-bpmf-cin\\\"",
 					"OVAFREVERSELOOKUP_IDENTIFIER_PREFIX=\\\"ReverseLookup\\\"",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ModulePackages/OVAFReverseLookup/YKReverseLookup-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
@@ -6020,7 +6004,6 @@
 		6AEBD0070D5D7E0D00ABF19D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
