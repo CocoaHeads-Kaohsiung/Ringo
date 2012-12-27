@@ -2,4 +2,6 @@
 
 export PWD=`pwd`
 export DEST=$PWD/build
-export BUILD_TARGETS=(Ringo)
+
+export PROJECTNAME=Ringo
+export BUILD_TARGETS=(Takao-All)
