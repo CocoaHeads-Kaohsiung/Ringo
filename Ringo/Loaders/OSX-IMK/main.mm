@@ -12,7 +12,7 @@ using namespace std;
 IMKServer *OVInputMethodServer = nil;
 
 int main(int argc, char *argv[]) {
-  @autoreleasepool {
+  NSAutoreleasePool *pool = [NSAutoreleasePool new];
     if (argc > 1) {
       NSApplicationLoad();
       [NSRunLoop currentRunLoop];
@@ -137,6 +137,6 @@ int main(int argc, char *argv[]) {
     [OpenVanillaLoader releaseSharedObjects];
 //    [OVInputMethodServer release];
 
-  }
+  [pool drain];
 	return 0;
 }

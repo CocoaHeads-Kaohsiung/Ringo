@@ -21,13 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		49AA5B3F168BDC5100D536DD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AA5B3E168BDC5100D536DD /* Cocoa.framework */; };
-		49AA5B5A168BFBA800D536DD /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A4772FD0D5C607200C6C744 /* main.mm */; };
-		49AA5B62168C166F00D536DD /* OpenVanilla.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A476EE70D5C48CE00C6C744 /* OpenVanilla.framework */; };
-		49AA5B63168C167300D536DD /* PlainVanilla.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A47716F0D5C5E5500C6C744 /* PlainVanilla.framework */; };
-		49AA5B68168C180800D536DD /* InputMethodKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A4773780D5C621400C6C744 /* InputMethodKit.framework */; };
-		49AA5B69168C183400D536DD /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D493E9D6167775BE00BA9368 /* libsqlite3.dylib */; };
-		49AA5B6B168C19BE00D536DD /* OpenVanillaLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A4773030D5C607200C6C744 /* OpenVanillaLoader.mm */; };
 		6A0138F50ED1D47900715577 /* YKAFWordCount.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A0138F20ED1D47900715577 /* YKAFWordCount.cpp */; };
 		6A0139040ED1D4A000715577 /* PackageMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A0139030ED1D4A000715577 /* PackageMain.cpp */; };
 		6A01390F0ED1D50500715577 /* OpenVanilla.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A476EE70D5C48CE00C6C744 /* OpenVanilla.framework */; };
@@ -590,20 +583,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		49AA5B64168C167D00D536DD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A476ED90D5C48AB00C6C744 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6A476EE60D5C48CE00C6C744;
-			remoteInfo = "OpenVanilla (Framework)";
-		};
-		49AA5B66168C168300D536DD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6A476ED90D5C48AB00C6C744 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6A47716E0D5C5E5500C6C744;
-			remoteInfo = "PlainVanilla (Framework)";
-		};
 		6A01390D0ED1D50100715577 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6A476ED90D5C48AB00C6C744 /* Project object */;
@@ -967,7 +946,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		49AA5B3D168BDC5100D536DD /* Ringo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ringo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49AA5B3E168BDC5100D536DD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		49AA5B41168BDC5100D536DD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		49AA5B42168BDC5100D536DD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -1475,18 +1453,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		49AA5B3A168BDC5100D536DD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				49AA5B69168C183400D536DD /* libsqlite3.dylib in Frameworks */,
-				49AA5B68168C180800D536DD /* InputMethodKit.framework in Frameworks */,
-				49AA5B63168C167300D536DD /* PlainVanilla.framework in Frameworks */,
-				49AA5B62168C166F00D536DD /* OpenVanilla.framework in Frameworks */,
-				49AA5B3F168BDC5100D536DD /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6A0138E90ED1D44200715577 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1928,7 +1894,6 @@
 				6A0138EB0ED1D44200715577 /* YKAFWordCount.bundle */,
 				D4FCBBF50EE416E900D9788A /* PhraseEditorTiger.app */,
 				6A1D4C7510613D600085AFA3 /* ModuleSign */,
-				49AA5B3D168BDC5100D536DD /* Ringo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3023,13 +2988,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		49AA5B59168BEDF600D536DD /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6A2D560E0D5D889400E710D6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -3354,26 +3312,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		49AA5B3C168BDC5100D536DD /* Ringo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 49AA5B58168BDC5200D536DD /* Build configuration list for PBXNativeTarget "Ringo" */;
-			buildPhases = (
-				49AA5B59168BEDF600D536DD /* Headers */,
-				49AA5B39168BDC5100D536DD /* Sources */,
-				49AA5B3A168BDC5100D536DD /* Frameworks */,
-				49AA5B3B168BDC5100D536DD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				49AA5B67168C168300D536DD /* PBXTargetDependency */,
-				49AA5B65168C167D00D536DD /* PBXTargetDependency */,
-			);
-			name = Ringo;
-			productName = Ringo;
-			productReference = 49AA5B3D168BDC5100D536DD /* Ringo.app */;
-			productType = "com.apple.product-type.application";
-		};
 		6A0138EA0ED1D44200715577 /* YKAFWordCount */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A0138EF0ED1D44400715577 /* Build configuration list for PBXNativeTarget "YKAFWordCount" */;
@@ -3958,7 +3896,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				49AA5B3C168BDC5100D536DD /* Ringo */,
 				6A514CDF0DA268C500464D51 /* Takao-All */,
 				6A4772920D5C5FCE00C6C744 /* Takao (Loader OSX-IMK) */,
 				6A47702A0D5C521600C6C744 /* OpenVanilla (Library) */,
@@ -3995,13 +3932,6 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		49AA5B3B168BDC5100D536DD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6A0138E70ED1D44200715577 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4226,15 +4156,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		49AA5B39168BDC5100D536DD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				49AA5B5A168BFBA800D536DD /* main.mm in Sources */,
-				49AA5B6B168C19BE00D536DD /* OpenVanillaLoader.mm in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6A0138E80ED1D44200715577 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4624,16 +4545,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		49AA5B65168C167D00D536DD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6A476EE60D5C48CE00C6C744 /* OpenVanilla (Framework) */;
-			targetProxy = 49AA5B64168C167D00D536DD /* PBXContainerItemProxy */;
-		};
-		49AA5B67168C168300D536DD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6A47716E0D5C5E5500C6C744 /* PlainVanilla (Framework) */;
-			targetProxy = 49AA5B66168C168300D536DD /* PBXContainerItemProxy */;
-		};
 		6A01390E0ED1D50100715577 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6A476EE60D5C48CE00C6C744 /* OpenVanilla (Framework) */;
@@ -5060,101 +4971,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		49AA5B56168BDC5200D536DD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-					"OPENVANILLA_LOADER_COMPONENT_NAME=\\\"Ringo-OSX\\\"",
-					"OPENVANILLA_DO_CONNECTION_NAME=@\\\"RingoService\\\"",
-					"OPENVANILLA_CONNECTION_NAME=@\\\"Ringo_Connection\\\"",
-					OVLOADER_USE_SQLITE_CRYPTO,
-					"PVLOADERPOLICY_LOADER_IDENTIFIER=\\\"tw.cocoaheads.imk.ringo\\\"",
-					"PVLOADERPOLICY_LOADER_NAME=\\\"Ringo\\\"",
-					"OPENVANILLA_DATABASE_COMPONENT_NAME=\\\"Ringo-OSX-Database\\\"",
-					"OV_USE_SQLITE=1",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = "";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Loaders/OSX-IMK/Takao-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug\"",
-				);
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		49AA5B57168BDC5200D536DD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEAD_CODE_STRIPPING = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEPLOYMENT_POSTPROCESSING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				GCC_VERSION = "";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Loaders/OSX-IMK/Takao-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/build/Debug\"",
-				);
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SEPARATE_STRIP = YES;
-				STRIP_INSTALLED_PRODUCT = YES;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
 		6A0138ED0ED1D44400715577 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -6554,14 +6370,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		49AA5B58168BDC5200D536DD /* Build configuration list for PBXNativeTarget "Ringo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				49AA5B56168BDC5200D536DD /* Debug */,
-				49AA5B57168BDC5200D536DD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
 		6A0138EF0ED1D44400715577 /* Build configuration list for PBXNativeTarget "YKAFWordCount" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
