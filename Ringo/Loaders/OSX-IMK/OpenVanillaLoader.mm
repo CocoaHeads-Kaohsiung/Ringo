@@ -306,15 +306,18 @@ using namespace OpenVanilla;
 		#endif
 	
         _SQLiteDatabaseService = OVSQLiteDatabaseService::ServiceWithExistingConnection(dbc, true);
-        
-        if (dbc->execute("PRAGMA synchronous = OFF") == SQLITE_OK) {
-            // NSLog(@"pragma executed");
-        }
-        else {
-            // NSLog(@"pragma execution failed");
-        }
 
-		mainDBVersion = FetchDatabaseVersionInfo(_SQLiteDatabaseService->connection(), "cooked_information");
+    /* @FIXED_FOR_RUNNING
+*        if (dbc->execute("PRAGMA synchronous = OFF") == SQLITE_OK) {
+*            // NSLog(@"pragma executed");
+*        }
+*        else {
+*            // NSLog(@"pragma execution failed");
+*        }
+*
+*		mainDBVersion = FetchDatabaseVersionInfo(_SQLiteDatabaseService->connection(), "cooked_information");
+*/
+    mainDBVersion = "1.5.0";
 	#endif
 	
 	if (supplementDBVersion.size()) {
@@ -363,9 +366,11 @@ using namespace OpenVanilla;
 
 - (void)_firstTimeUpdateUserData
 {
-	[self mergeOneKeyData];
+/*  @FIXED_FOR_RUNNING
+*	[self mergeOneKeyData];
+*/
 	[self mergeCannedMessagesData];
-	[[NSNotificationCenter defaultCenter] postNotificationName:CVLoaderUpdateCannedMessagesNotification object:self];	
+	[[NSNotificationCenter defaultCenter] postNotificationName:CVLoaderUpdateCannedMessagesNotification object:self];
 }
 
 - (void)_addInitializedStaticMoudlePackages
@@ -373,30 +378,30 @@ using namespace OpenVanilla;
     OVModulePackage* pkg;
     OVPathInfo pathInfo = _loaderPolicy->modulePackagePathInfoFromPath("");
     
-    pkg = new OVIMMandarinPackage;
-    pkg->initialize(&pathInfo, _loaderService);
-    _staticModuleLoadingSystem->addInitializedPackage("OVIMMandarinPackage", pkg);
-    
-    pkg = new OVIMGenericPackage;
-    pkg->initialize(&pathInfo, _loaderService);
-    _staticModuleLoadingSystem->addInitializedPackage("OVIMGenericPackage", pkg);    
-    
-    pkg = new OVOFFullWidthCharacterPackage;
-    pkg->initialize(&pathInfo, _loaderService);
-    _staticModuleLoadingSystem->addInitializedPackage("OVOFFullWidthCharacterPackage", pkg);
-    
-    pkg = new OVOFHanConvertPackage;    
-    pkg->initialize(&pathInfo, _loaderService);
-    _staticModuleLoadingSystem->addInitializedPackage("OVOFHanConvertPackage", pkg);
-    
-    pkg = new OVAFBopomofoCorrectionPackage;    
-    pkg->initialize(&pathInfo, _loaderService);
-    _staticModuleLoadingSystem->addInitializedPackage("OVAFBopomofoCorrectionPackage", pkg);
+//    pkg = new OVIMMandarinPackage;
+//    pkg->initialize(&pathInfo, _loaderService);
+//    _staticModuleLoadingSystem->addInitializedPackage("OVIMMandarinPackage", pkg);
+  
+//    pkg = new OVIMGenericPackage;
+//    pkg->initialize(&pathInfo, _loaderService);
+//    _staticModuleLoadingSystem->addInitializedPackage("OVIMGenericPackage", pkg);    
+  
+//    pkg = new OVOFFullWidthCharacterPackage;
+//    pkg->initialize(&pathInfo, _loaderService);
+//    _staticModuleLoadingSystem->addInitializedPackage("OVOFFullWidthCharacterPackage", pkg);
+  
+//    pkg = new OVOFHanConvertPackage;    
+//    pkg->initialize(&pathInfo, _loaderService);
+//    _staticModuleLoadingSystem->addInitializedPackage("OVOFHanConvertPackage", pkg);
+  
+//    pkg = new OVAFBopomofoCorrectionPackage;    
+//    pkg->initialize(&pathInfo, _loaderService);
+//    _staticModuleLoadingSystem->addInitializedPackage("OVAFBopomofoCorrectionPackage", pkg);
 	
-    pkg = new YKAFOneKeyPackage;
-    pkg->initialize(&pathInfo, _loaderService);
-    _staticModuleLoadingSystem->addInitializedPackage("YKAFOneKeyPackage", pkg);	
-    
+//    pkg = new YKAFOneKeyPackage;
+//    pkg->initialize(&pathInfo, _loaderService);
+//    _staticModuleLoadingSystem->addInitializedPackage("YKAFOneKeyPackage", pkg);	
+  
     pkg = new OVAFEvalPackage;    
     pkg->initialize(&pathInfo, _loaderService);
     _staticModuleLoadingSystem->addInitializedPackage("OVAFEvalPackage", pkg);	    
@@ -546,7 +551,8 @@ using namespace OpenVanilla;
         _loader->syncLoaderConfig(true);
 	
 	if (!_loader->primaryInputMethod().size()) {
-		_loader->setPrimaryInputMethod("SmartMandarin");
+//		_loader->setPrimaryInputMethod("SmartMandarin");
+    _loader->setPrimaryInputMethod(OVAFEVAL_IDENTIFIER);
         _loader->syncSandwichConfig();
 	}
 
@@ -1175,89 +1181,92 @@ using namespace OpenVanilla;
 	@synchronized(self) {	
 		[_mergedCannedMessagesArray removeAllObjects];
 
-		string cannedMsgs = _userPersistence->fetchLatestValueByKeyAndPopulateUserDB("canned_messages");
-		PVPlistValue *parsed = PVPropertyList::ParsePlistFromString(cannedMsgs.c_str());
-	
-	
-		string localDT = OVDateTimeHelper::LocalDateTimeString();
-		
-		PVPlistValue msgArray(PVPlistValue::Array);    
-		PVPlistValue* pvs[2];
-		pvs[0] = parsed;
-		pvs[1] = _userCannedMessagePlist->rootDictionary();
-		
-		for (size_t pi = 0 ; pi < 2 ; pi++) {
-			PVPlistValue* msgs = pvs[pi]->valueForKey("CannedMessages");    
-			if (msgs) {    
-				for (size_t i = 0 ; i < msgs->arraySize() ; i++) {
-					PVPlistValue* category = msgs->arrayElementAtIndex(i);
-					
-					string notBefore = category->stringValueForKey("NotBefore");
-					if (notBefore.length() && localDT < notBefore) {
-						continue;
-					}
-					
-					string notAfter = category->stringValueForKey("NotAfter");
-					if (notAfter.length() && localDT > notAfter) {
-						continue;
-					}
-					
-					msgArray.addArrayElement(category);
-				}
-			}
-		}
-		
-		vector<string> userMessages;
-		ifstream ifs;
-		ifs.open([self userFreeCannedMessagePath].c_str(), ifstream::in);
-		
-		if (ifs.good()) {
-			// ignore the first line
-			string emptyLine;
-			getline(ifs, emptyLine);
-		}
-		
-		while (ifs.good()) {
-			string line;
-			getline(ifs, line);
-			if (line.length()) {
-				userMessages.push_back(line);
-			}
-		}
-		ifs.close();
-		
-		if (userMessages.size()) {
-			PVPlistValue userCategory(PVPlistValue::Dictionary);
-			userCategory.setKeyValue("Name", [LFLSTR(@"User Defined") UTF8String]);
-			PVPlistValue messages(PVPlistValue::Array);
-			for (vector<string>::iterator umi = userMessages.begin() ; umi != userMessages.end() ; ++umi) {
-				PVPlistValue msg(*umi);
-				messages.addArrayElement(&msg);
-			}
-			userCategory.setKeyValue("Messages", &messages);
-			msgArray.addArrayElement(&userCategory);
-		}    
-		
-		PVPlistValue newData(PVPlistValue::Dictionary);
-		newData.setKeyValue("CannedMessages", &msgArray);    
-	
-		stringstream sst;
-		sst << newData;
-		
-		const string &s = sst.str();
-		const char *ndc = s.c_str();
-		
-	
-		NSData *cmData = [NSData dataWithBytesNoCopy:(void*)ndc length:s.length() freeWhenDone:NO];		
-		id cmPlist = [NSPropertyListSerialization propertyListFromData:cmData mutabilityOption:NSPropertyListMutableContainersAndLeaves format:NULL errorDescription:NULL];
-		if (cmPlist) {
-			NSArray *a = [cmPlist objectForKey:@"CannedMessages"];
-			if (a) {
-				if ([a isKindOfClass:[NSArray class]]) {
-					[_mergedCannedMessagesArray addObjectsFromArray:a];
-				}
-			}
-		}
+/* @FIXED_FOR_RUNNING
+*
+*		string cannedMsgs = _userPersistence->fetchLatestValueByKeyAndPopulateUserDB("canned_messages");
+*		PVPlistValue *parsed = PVPropertyList::ParsePlistFromString(cannedMsgs.c_str());
+*
+*
+*		string localDT = OVDateTimeHelper::LocalDateTimeString();
+*
+*		PVPlistValue msgArray(PVPlistValue::Array);
+*		PVPlistValue* pvs[2];
+*		pvs[0] = parsed;
+*		pvs[1] = _userCannedMessagePlist->rootDictionary();
+*
+*		for (size_t pi = 0 ; pi < 2 ; pi++) {
+*			PVPlistValue* msgs = pvs[pi]->valueForKey("CannedMessages");
+*			if (msgs) {
+*				for (size_t i = 0 ; i < msgs->arraySize() ; i++) {
+*					PVPlistValue* category = msgs->arrayElementAtIndex(i);
+*
+*					string notBefore = category->stringValueForKey("NotBefore");
+*					if (notBefore.length() && localDT < notBefore) {
+*						continue;
+*					}
+*
+*					string notAfter = category->stringValueForKey("NotAfter");
+*					if (notAfter.length() && localDT > notAfter) {
+*						continue;
+*					}
+*
+*					msgArray.addArrayElement(category);
+*				}
+*			}
+*		}
+*
+*		vector<string> userMessages;
+*		ifstream ifs;
+*		ifs.open([self userFreeCannedMessagePath].c_str(), ifstream::in);
+*
+*		if (ifs.good()) {
+*			// ignore the first line
+*			string emptyLine;
+*			getline(ifs, emptyLine);
+*		}
+*
+*		while (ifs.good()) {
+*			string line;
+*			getline(ifs, line);
+*			if (line.length()) {
+*				userMessages.push_back(line);
+*			}
+*		}
+*		ifs.close();
+*
+*		if (userMessages.size()) {
+*			PVPlistValue userCategory(PVPlistValue::Dictionary);
+*			userCategory.setKeyValue("Name", [LFLSTR(@"User Defined") UTF8String]);
+*			PVPlistValue messages(PVPlistValue::Array);
+*			for (vector<string>::iterator umi = userMessages.begin() ; umi != userMessages.end() ; ++umi) {
+*				PVPlistValue msg(*umi);
+*				messages.addArrayElement(&msg);
+*			}
+*			userCategory.setKeyValue("Messages", &messages);
+*			msgArray.addArrayElement(&userCategory);
+*		}
+*
+*		PVPlistValue newData(PVPlistValue::Dictionary);
+*		newData.setKeyValue("CannedMessages", &msgArray);
+*
+*		stringstream sst;
+*		sst << newData;
+*
+*		const string &s = sst.str();
+*		const char *ndc = s.c_str();
+*
+*
+*		NSData *cmData = [NSData dataWithBytesNoCopy:(void*)ndc length:s.length() freeWhenDone:NO];
+*		id cmPlist = [NSPropertyListSerialization propertyListFromData:cmData mutabilityOption:NSPropertyListMutableContainersAndLeaves format:NULL errorDescription:NULL];
+*		if (cmPlist) {
+*			NSArray *a = [cmPlist objectForKey:@"CannedMessages"];
+*			if (a) {
+*				if ([a isKindOfClass:[NSArray class]]) {
+*					[_mergedCannedMessagesArray addObjectsFromArray:a];
+*				}
+*			}
+*		}
+*/
 	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:CVLoaderUpdateCannedMessagesNotification object:self];	
