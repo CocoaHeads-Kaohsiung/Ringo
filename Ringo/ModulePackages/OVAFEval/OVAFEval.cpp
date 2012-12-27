@@ -39,6 +39,8 @@ using namespace Evalgelion;
 bool OVAFEvalContext::handleKey(OVKey* key, OVTextBuffer* readingText, OVTextBuffer* composingText, OVCandidateService* candidateService, OVLoaderService* loaderService)
 {
 	string locale = loaderService->locale();
+  
+  cout << "迷你計算機 Locale: " << locale << endl;
 
 	if (key->keyCode() == '9' && key->isCtrlPressed() && !m_enabled && readingText->isEmpty() && composingText->isEmpty() && !loaderService->prompt().size()) {
         m_enabled = true;
