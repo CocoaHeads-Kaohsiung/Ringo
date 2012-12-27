@@ -21,7 +21,7 @@
 
 #pragma mark Interface Builder actions
 
-- (IBAction)toggleSymbol:(id)sender;
+//- (IBAction)toggleSymbol:(id)sender;
 - (IBAction)hide:(id)sender;
 - (IBAction)show:(id)sender;
 

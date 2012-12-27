@@ -208,7 +208,7 @@ namespace OpenVanilla {
             }
             else {
                 PVPlistValue* oldValue;
-                if (oldValue = (*m_arrayValue)[index]) {
+                if ((oldValue = (*m_arrayValue)[index])) {
                     delete oldValue;
                 }
                 
