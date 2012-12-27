@@ -306,15 +306,18 @@ using namespace OpenVanilla;
 		#endif
 	
         _SQLiteDatabaseService = OVSQLiteDatabaseService::ServiceWithExistingConnection(dbc, true);
-        
-        if (dbc->execute("PRAGMA synchronous = OFF") == SQLITE_OK) {
-            // NSLog(@"pragma executed");
-        }
-        else {
-            // NSLog(@"pragma execution failed");
-        }
 
-		mainDBVersion = FetchDatabaseVersionInfo(_SQLiteDatabaseService->connection(), "cooked_information");
+    /* @FIXED_FOR_RUNNING
+*        if (dbc->execute("PRAGMA synchronous = OFF") == SQLITE_OK) {
+*            // NSLog(@"pragma executed");
+*        }
+*        else {
+*            // NSLog(@"pragma execution failed");
+*        }
+*
+*		mainDBVersion = FetchDatabaseVersionInfo(_SQLiteDatabaseService->connection(), "cooked_information");
+*/
+    mainDBVersion = "1.5.0";
 	#endif
 	
 	if (supplementDBVersion.size()) {
@@ -373,30 +376,30 @@ using namespace OpenVanilla;
     OVModulePackage* pkg;
     OVPathInfo pathInfo = _loaderPolicy->modulePackagePathInfoFromPath("");
     
-    pkg = new OVIMMandarinPackage;
-    pkg->initialize(&pathInfo, _loaderService);
-    _staticModuleLoadingSystem->addInitializedPackage("OVIMMandarinPackage", pkg);
-    
-    pkg = new OVIMGenericPackage;
-    pkg->initialize(&pathInfo, _loaderService);
-    _staticModuleLoadingSystem->addInitializedPackage("OVIMGenericPackage", pkg);    
-    
-    pkg = new OVOFFullWidthCharacterPackage;
-    pkg->initialize(&pathInfo, _loaderService);
-    _staticModuleLoadingSystem->addInitializedPackage("OVOFFullWidthCharacterPackage", pkg);
-    
-    pkg = new OVOFHanConvertPackage;    
-    pkg->initialize(&pathInfo, _loaderService);
-    _staticModuleLoadingSystem->addInitializedPackage("OVOFHanConvertPackage", pkg);
-    
-    pkg = new OVAFBopomofoCorrectionPackage;    
-    pkg->initialize(&pathInfo, _loaderService);
-    _staticModuleLoadingSystem->addInitializedPackage("OVAFBopomofoCorrectionPackage", pkg);
+//    pkg = new OVIMMandarinPackage;
+//    pkg->initialize(&pathInfo, _loaderService);
+//    _staticModuleLoadingSystem->addInitializedPackage("OVIMMandarinPackage", pkg);
+  
+//    pkg = new OVIMGenericPackage;
+//    pkg->initialize(&pathInfo, _loaderService);
+//    _staticModuleLoadingSystem->addInitializedPackage("OVIMGenericPackage", pkg);    
+  
+//    pkg = new OVOFFullWidthCharacterPackage;
+//    pkg->initialize(&pathInfo, _loaderService);
+//    _staticModuleLoadingSystem->addInitializedPackage("OVOFFullWidthCharacterPackage", pkg);
+  
+//    pkg = new OVOFHanConvertPackage;    
+//    pkg->initialize(&pathInfo, _loaderService);
+//    _staticModuleLoadingSystem->addInitializedPackage("OVOFHanConvertPackage", pkg);
+  
+//    pkg = new OVAFBopomofoCorrectionPackage;    
+//    pkg->initialize(&pathInfo, _loaderService);
+//    _staticModuleLoadingSystem->addInitializedPackage("OVAFBopomofoCorrectionPackage", pkg);
 	
-    pkg = new YKAFOneKeyPackage;
-    pkg->initialize(&pathInfo, _loaderService);
-    _staticModuleLoadingSystem->addInitializedPackage("YKAFOneKeyPackage", pkg);	
-    
+//    pkg = new YKAFOneKeyPackage;
+//    pkg->initialize(&pathInfo, _loaderService);
+//    _staticModuleLoadingSystem->addInitializedPackage("YKAFOneKeyPackage", pkg);	
+  
     pkg = new OVAFEvalPackage;    
     pkg->initialize(&pathInfo, _loaderService);
     _staticModuleLoadingSystem->addInitializedPackage("OVAFEvalPackage", pkg);	    
@@ -546,7 +549,8 @@ using namespace OpenVanilla;
         _loader->syncLoaderConfig(true);
 	
 	if (!_loader->primaryInputMethod().size()) {
-		_loader->setPrimaryInputMethod("SmartMandarin");
+//		_loader->setPrimaryInputMethod("SmartMandarin");
+    _loader->setPrimaryInputMethod(OVAFEVAL_IDENTIFIER);
         _loader->syncSandwichConfig();
 	}
 

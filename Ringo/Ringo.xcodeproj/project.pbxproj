@@ -1843,7 +1843,6 @@
 				6A4771460D5C583600C6C744 /* OS X Frameworks and Libraries */,
 				6A476FF90D5C4DBE00C6C744 /* ExternalLibraries */,
 				6A476EE80D5C48CE00C6C744 /* Products */,
-				6AFDF3E3113261E300AE32D6 /* libcrypto.dylib */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2111,6 +2110,7 @@
 		6A4771460D5C583600C6C744 /* OS X Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				6AFDF3E3113261E300AE32D6 /* libcrypto.dylib */,
 				D493E9D6167775BE00BA9368 /* libsqlite3.dylib */,
 				D455A7FF106267A200CC2B47 /* Security.framework */,
 				D430EE3A0EC30F7C006B7EF9 /* AddressBook.framework */,
@@ -3862,7 +3862,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = 6A476EDC0D5C48AB00C6C744 /* Build configuration list for PBXProject "Takao" */;
+			buildConfigurationList = 6A476EDC0D5C48AB00C6C744 /* Build configuration list for PBXProject "Ringo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -6391,7 +6391,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6A476EDC0D5C48AB00C6C744 /* Build configuration list for PBXProject "Takao" */ = {
+		6A476EDC0D5C48AB00C6C744 /* Build configuration list for PBXProject "Ringo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6A476EDA0D5C48AB00C6C744 /* Debug */,
