@@ -49,7 +49,7 @@ namespace OpenVanilla {
         
         virtual bool initialize(OVPathInfo* , OVLoaderService* loaderService)
         {
-            // loaderService->logger("OVAFEvalPacakge") << "Initialized" << endl;
+            loaderService->logger("OVAFEvalPacakge") << "Initialized" << endl;
             return true;
         }        
     };

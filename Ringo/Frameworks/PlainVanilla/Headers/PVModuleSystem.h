@@ -169,6 +169,13 @@ namespace OpenVanilla {
         
         virtual OVModule* moduleWithName(const string& name, PVLoaderPolicy* loaderPolicy, OVLoaderService* loaderService, bool needInit = true)
         {
+          // @FIXED_FOR_RUNNING
+        map<string, ModuleMetadata>::iterator myIter = m_moduleStore.begin();
+        for (; myIter == m_moduleStore.end(); ++myIter) {
+          ModuleMetadata& m = (*myIter).second;
+          cout << m.modulePackageName << endl;
+        }
+        
             map<string, ModuleMetadata>::iterator mdataIter = m_moduleStore.find(name);
             if (mdataIter == m_moduleStore.end())
                 return 0;

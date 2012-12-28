@@ -150,7 +150,7 @@ namespace OpenVanilla {
 //                m_loaderService->logger("Loader") << "Starts to reload" << endl;
             
             string plistFilename = m_loaderPolicy->propertyListPathForLoader();
-//            m_loaderService->logger("Loader") << "Uses plist: " << plistFilename << endl;
+            m_loaderService->logger("Loader") << "Uses plist: " << plistFilename << endl;
 
 
 			m_loaderPropertyList = new PVPropertyList(plistFilename);            
@@ -490,40 +490,43 @@ namespace OpenVanilla {
         void validatePrimaryInputMethod()
         {
             PVPlistValue* dict = m_loaderPropertyList->rootDictionary();            
-            OVModule* inputMethodModule = moduleWithName(m_cfgPrimaryInputMethod);            
-            
+            OVModule* inputMethodModule = moduleWithName(m_cfgPrimaryInputMethod);
+
+          // @FIXED_FOR_RUNNING
+        m_loaderService->logger("Loader") << "Find module: " << m_cfgPrimaryInputMethod << "..." << endl;
+        
             // can't find the module with the name, we fall back to the first of the list
             if (!inputMethodModule) {
                 m_loaderService->logger("Loader") << "No input method module found." << endl;
 
                 m_cfgPrimaryInputMethod = "";
                 
-                // // find next usable module
-                // vector<string> inputMethods = allInputMethodIdentifiers();
-                // for (vector<string>::iterator iter = inputMethods.begin(); iter != inputMethods.end(); ++iter)
-                // {
-                //     m_loaderService->logger("Loader") << "Trying " << *iter << endl;
-                //     
-                //     if (!isFailedModule(*iter)) {
-                //         m_loaderService->logger("Loader") << "Not failed" << endl; 
-                //         if (moduleWithName(*iter)) {
-                //             m_cfgPrimaryInputMethod = *iter;
-                //             m_loaderService->logger("Loader") << "Good: " << *iter << endl;
-                //             break;
-                //         }
-                //     }
-                //     else {
-                //         m_loaderService->logger("Loader") << "Failed! " << *iter << endl;
-                //     }
-                // }                
-                // 
-                // m_loaderService->logger("Loader") << "Number of available input method modules: " << inputMethods.size() << endl;
+                 // find next usable module
+                 vector<string> inputMethods = allInputMethodIdentifiers();
+                 for (vector<string>::iterator iter = inputMethods.begin(); iter != inputMethods.end(); ++iter)
+                 {
+                     m_loaderService->logger("Loader") << "Trying " << *iter << endl;
+                 
+                     if (!isFailedModule(*iter)) {
+                         m_loaderService->logger("Loader") << "Not failed" << endl;
+                         if (moduleWithName(*iter)) {
+                             m_cfgPrimaryInputMethod = *iter;
+                             m_loaderService->logger("Loader") << "Good: " << *iter << endl;
+                             break;
+                         }
+                     }
+                     else {
+                         m_loaderService->logger("Loader") << "Failed! " << *iter << endl;
+                     }
+                 }
+              
+                 m_loaderService->logger("Loader") << "Number of available input method modules: " << inputMethods.size() << endl;
             }
             else {
-//                m_loaderService->logger("Loader") << "Input method module found." << endl;
+                m_loaderService->logger("Loader") << "Input method module found." << endl;
             }
             
-//            m_loaderService->logger("Loader") << "Primary input method: " << m_cfgPrimaryInputMethod << endl;
+            m_loaderService->logger("Loader") << "Primary input method: " << m_cfgPrimaryInputMethod << endl;
             dict->setKeyValue("PrimaryInputMethod", m_cfgPrimaryInputMethod);            
         }
         
@@ -622,7 +625,7 @@ namespace OpenVanilla {
         
         void loadLoaderConfig()
         {
-//            m_loaderService->logger("Loader") << "Updates config" << endl;
+            m_loaderService->logger("Loader") << "Updates config" << endl;
             m_loaderPropertyList->readSync();
             PVPlistValue* dict = m_loaderPropertyList->rootDictionary();
 
