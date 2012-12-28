@@ -111,57 +111,53 @@ using namespace OpenVanilla;
 
 @implementation OpenVanillaLoader
 
-#pragma mark Class methods
-
-+ (OpenVanillaLoader*)sharedInstance
-{
-    if (!OVLSharedInstance) {
-        OVLSharedInstance = [[OpenVanillaLoader alloc] init];
-    }
++ (OpenVanillaLoader*)sharedInstance {
+  if (!OVLSharedInstance) {
+    OVLSharedInstance = [[OpenVanillaLoader alloc] init];
+  }
     
-    return OVLSharedInstance;
-}
-+ (PVLoader*)sharedLoader
-{
-    return [[OpenVanillaLoader sharedInstance] loader];
-}
-+ (PVLoaderService*)sharedLoaderService
-{
-    return [[OpenVanillaLoader sharedInstance] loaderService];
-}
-+ (VersionChecker*)sharedVersionChecker
-{
-    return [[OpenVanillaLoader sharedInstance] versionChecker];
-}
-+ (NSLock *)sharedLock
-{
-    if (!OVLSharedLock) {
-        OVLSharedLock = [[NSLock alloc] init];
-    }
-
-    return OVLSharedLock;
-}
-+ (void)releaseSharedObjects
-{
-    [OVLSharedInstance release];
-    [OVLSharedLock release];
-}
-+ (NSString*)locale
-{
-	// See here http://developer.apple.com/qa/qa2006/qa1391.html
-    // We'll return canonical locale names, so zh-Hant and zh-Hans instead of zh_TW and zh_CN
-    
-    NSArray *languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
-    if ([languages count])
-        return [languages objectAtIndex:0];
-    
-    return @"en";
+  return OVLSharedInstance;
 }
 
++ (PVLoader*)sharedLoader {
+  return [[OpenVanillaLoader sharedInstance] loader];
+}
+
++ (PVLoaderService*)sharedLoaderService {
+  return [[OpenVanillaLoader sharedInstance] loaderService];
+}
+
++ (VersionChecker*)sharedVersionChecker {
+  return [[OpenVanillaLoader sharedInstance] versionChecker];
+}
+
++ (NSLock *)sharedLock {
+  if (!OVLSharedLock) {
+    OVLSharedLock = [[NSLock alloc] init];
+  }
+
+  return OVLSharedLock;
+}
+
++ (void)releaseSharedObjects {
+  [OVLSharedInstance release];
+  [OVLSharedLock release];
+}
+
++ (NSString*)locale {
+  // See here http://developer.apple.com/qa/qa2006/qa1391.html
+  // We'll return canonical locale names, so zh-Hant and zh-Hans instead of zh_TW and zh_CN
+    
+  NSArray *languages = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+  if ([languages count]) return [languages objectAtIndex:0];
+    
+  return @"en";
+}
+
+#pragma mark -
 #pragma mark Instance methods
 
-- (id)init
-{
+- (id)init {
 	if (self = [super init]) {
 		_loaderPolicy = 0;
 		_encodingService = 0;
@@ -196,22 +192,18 @@ using namespace OpenVanilla;
 		_userOneKeyPlist = 0;
 		_userCannedMessagePlist = 0;
 		_userFreeCannedMessageFileTimestamp = new OVFileTimestamp;
-
-		return self;
-		
 	}
-	
 	return self;
 }
-- (void)dealloc
-{
-    if ([_downloadTask isRunning]) {
-        [_downloadTask terminate];        
-    }
+
+- (void)dealloc {
+  if ([_downloadTask isRunning]) {
+      [_downloadTask terminate];
+  }
     
-    [_downloadTask release];
+  [_downloadTask release];
     
-    [self shutDown];
+  [self shutDown];
 	
 	[_autoUpdateHTTPRequest release];
 	[_autoUpdateSignatureHTTPRequest release];
@@ -229,8 +221,9 @@ using namespace OpenVanilla;
 		delete _userCannedMessagePlist;
 	}
 	
-    [super dealloc];
+  [super dealloc];
 }
+
 - (void)createDatabaseServices
 {
 	_userPersistence->setDefaultDatabaseConnection(0, "");
@@ -377,7 +370,8 @@ using namespace OpenVanilla;
 {
     OVModulePackage* pkg;
     OVPathInfo pathInfo = _loaderPolicy->modulePackagePathInfoFromPath("");
-    
+
+/* @FIXED_FOR_RUNNING */
 //    pkg = new OVIMMandarinPackage;
 //    pkg->initialize(&pathInfo, _loaderService);
 //    _staticModuleLoadingSystem->addInitializedPackage("OVIMMandarinPackage", pkg);
@@ -404,7 +398,7 @@ using namespace OpenVanilla;
   
     pkg = new OVAFEvalPackage;    
     pkg->initialize(&pathInfo, _loaderService);
-    _staticModuleLoadingSystem->addInitializedPackage("OVAFEvalPackage", pkg);	    
+    _staticModuleLoadingSystem->addInitializedPackage("OVAFEvalPackage", pkg);
 }
 
 - (void)reload
@@ -443,9 +437,11 @@ using namespace OpenVanilla;
     NSAutoreleasePool *pool = [NSAutoreleasePool new];
     [[OpenVanillaLoader sharedLock] lock];
 
-    if (_loader)
-        return true;
-        
+    if (_loader) {
+      [[OpenVanillaLoader sharedLock] unlock];      // @FIXED_FOR_RUNNING: return will cause loader still lock?
+      return true;
+    }
+  
     vector<string> cppLoadPaths;
 
 	#ifndef OVLOADER_SUPPRESS_LOADPATHS
@@ -463,7 +459,7 @@ using namespace OpenVanilla;
 	
     _versionChecker = new VersionChecker;    
     if (bundleVersion) {
-        // NSLog(@"%s version %@", OPENVANILLA_LOADER_COMPONENT_NAME, bundleVersion);
+        NSLog(@"%s version %@", OPENVANILLA_LOADER_COMPONENT_NAME, bundleVersion);
         _versionChecker->registerComponentVersion(OPENVANILLA_LOADER_COMPONENT_NAME, [bundleVersion UTF8String]);
     }
 	
@@ -643,7 +639,9 @@ using namespace OpenVanilla;
 {
     NSMutableArray *result = [NSMutableArray array];
     vector<pair<string, string> > rsp = _loader->allModuleIdentifiersAndNames();
-    OVWildcard exp(string([pattern UTF8String]));
+    // @FIXED_FOR_RUNNING
+  const char *p = [pattern UTF8String];
+    OVWildcard exp((string(p)));
     
     for (vector<pair<string, string> >::iterator ri = rsp.begin() ; ri != rsp.end() ; ++ri) {
         if (exp.match((*ri).first))

@@ -312,6 +312,7 @@ namespace OpenVanilla {
             map<string, OVModulePackage*>::iterator iter = m_modulePackages.find(name);
             if (iter == m_modulePackages.end()) {
                 m_modulePackages[name] = package;
+              
                 return true;
             }
             
