@@ -432,17 +432,16 @@ using namespace OpenVanilla;
 
     [[OpenVanillaLoader sharedLock] unlock];
 }
-- (bool)start:(NSArray*)loadPaths
-{
-    NSAutoreleasePool *pool = [NSAutoreleasePool new];
-    [[OpenVanillaLoader sharedLock] lock];
+- (bool)start:(NSArray*)loadPaths {
+  NSAutoreleasePool *pool = [NSAutoreleasePool new];
+  [[OpenVanillaLoader sharedLock] lock];
 
-    if (_loader) {
-      [[OpenVanillaLoader sharedLock] unlock];      // @FIXED_FOR_RUNNING: return will cause loader still lock?
-      return true;
-    }
+  if (_loader) {
+    [[OpenVanillaLoader sharedLock] unlock];      // @FIXED_FOR_RUNNING: return will cause loader still lock?
+    return true;
+  }
   
-    vector<string> cppLoadPaths;
+  vector<string> cppLoadPaths;
 
 	#ifndef OVLOADER_SUPPRESS_LOADPATHS
 	NSEnumerator *loadPathsEnumerator = [loadPaths objectEnumerator];
@@ -454,16 +453,16 @@ using namespace OpenVanilla;
 	#endif
 
 	NSBundle *bundle = [NSBundle mainBundle];
-    NSDictionary *infoDictionary = [bundle infoDictionary];
-    NSString *bundleVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
+  NSDictionary *infoDictionary = [bundle infoDictionary];
+  NSString *bundleVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
 	
-    _versionChecker = new VersionChecker;    
-    if (bundleVersion) {
-        NSLog(@"%s version %@", OPENVANILLA_LOADER_COMPONENT_NAME, bundleVersion);
-        _versionChecker->registerComponentVersion(OPENVANILLA_LOADER_COMPONENT_NAME, [bundleVersion UTF8String]);
-    }
+  _versionChecker = new VersionChecker;
+  if (bundleVersion) {
+    NSLog(@"%s version %@", OPENVANILLA_LOADER_COMPONENT_NAME, bundleVersion);
+    _versionChecker->registerComponentVersion(OPENVANILLA_LOADER_COMPONENT_NAME, [bundleVersion UTF8String]);
+  }
 	
-    _loaderPolicy = new PVLoaderPolicy(cppLoadPaths);
+  _loaderPolicy = new PVLoaderPolicy(cppLoadPaths);
 	string loaderUserDataPath = OVDirectoryHelper::UserApplicationSupportDataDirectory(_loaderPolicy->loaderName());
 
 	vector<string> signedModuleLoadPaths;
@@ -474,7 +473,7 @@ using namespace OpenVanilla;
 		string modulePath = OVPathHelper::PathCat(libAppSupportLoaderPath, "SignedModules");
 		
 //		if (OVPathHelper::PathExists(modulePath) && OVPathHelper::IsDirectory(modulePath)) {
-//			NSLog(@"has signed module path: %s", modulePath.c_str());
+			NSLog(@"has signed module path: %s", modulePath.c_str());
 			signedModuleLoadPaths.push_back(modulePath);
 //		}
 	} while(0);
@@ -548,7 +547,7 @@ using namespace OpenVanilla;
 	
 	if (!_loader->primaryInputMethod().size()) {
 //		_loader->setPrimaryInputMethod("SmartMandarin");
-    _loader->setPrimaryInputMethod(OVAFEVAL_IDENTIFIER);
+    _loader->setPrimaryInputMethod("Evaluator");
         _loader->syncSandwichConfig();
 	}
 
