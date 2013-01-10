@@ -5806,7 +5806,7 @@
 					"OVIMSMARTMANDARIN_USE_SQLITE_CRYPTO=1",
 					"OVAFSEARCH_IDENTIFIER=\\\"Search\\\"",
 					"OVAFASSOCIATEDPHRASE_IDENTIFIER=\\\"AssociatedPhrase\\\"",
-					"OVAFEVAL_IDENTIFIER=\\\"Evaluator\\\"",
+					"OVAFEVAL_IDENTIFIER_UNUSED=\\\"Evaluator\\\"",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/lib;
@@ -5838,7 +5838,7 @@
 					"OVIMSMARTMANDARIN_USE_SQLITE_CRYPTO=1",
 					"OVAFSEARCH_IDENTIFIER=\\\"Search\\\"",
 					"OVAFASSOCIATEDPHRASE_IDENTIFIER=\\\"AssociatedPhrase\\\"",
-					"OVAFEVAL_IDENTIFIER=\\\"Evaluator\\\"",
+					"OVAFEVAL_IDENTIFIER_UNUSED=\\\"Evaluator\\\"",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/lib;
