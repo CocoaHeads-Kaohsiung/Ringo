@@ -547,7 +547,7 @@ using namespace OpenVanilla;
 	
 	if (!_loader->primaryInputMethod().size()) {
 //		_loader->setPrimaryInputMethod("SmartMandarin");
-    _loader->setPrimaryInputMethod("Evaluator");
+    _loader->setPrimaryInputMethod(OVAFEVAL_IDENTIFIER);
         _loader->syncSandwichConfig();
 	}
 
