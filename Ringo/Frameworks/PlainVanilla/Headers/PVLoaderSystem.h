@@ -265,7 +265,7 @@ namespace OpenVanilla {
         
         void toggleAroundFilter(const string& identifier)
         {
-            // m_loaderService->logger("Loader") << "toggle around filter: " << identifier << endl;
+            m_loaderService->logger("Loader") << "toggle around filter: " << identifier << endl;
             vector<string> result;
             
             for (vector<string>::iterator iter = m_cfgActivatedAroundFilters.begin() ; iter != m_cfgActivatedAroundFilters.end() ; ++iter)
@@ -273,7 +273,7 @@ namespace OpenVanilla {
                     result.push_back(*iter);
 
             if (result.size() != m_cfgActivatedAroundFilters.size()) {
-                // m_loaderService->logger("Loader") << "item removed" << endl;
+                m_loaderService->logger("Loader") << "item removed" << endl;
                 // item removed
                 m_cfgActivatedAroundFilters = result;
                 validateActivatedAroundFilters();
@@ -281,7 +281,7 @@ namespace OpenVanilla {
                 return;
             }
 
-            // m_loaderService->logger("Loader") << "adding item" << endl;
+            m_loaderService->logger("Loader") << "adding item" << endl;
             m_cfgActivatedAroundFilters.push_back(identifier);
             validateActivatedAroundFilters();
             saveLoaderConfig();
